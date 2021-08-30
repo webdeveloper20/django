@@ -1,0 +1,46 @@
+{%extends "layout.html"%} {%block body %}
+<!-- {% load crispy_forms_tags %} -->
+<h3>Kontrol Paneli</h3>
+<hr />
+<p>Hosgeldiniz,<small>{{request.user.username}}</small></p>
+<hr />
+<a class="btn btn-danger mb-5" href="/articles/addarticle">Mekale Ekle</a>
+<hr /> {% if articles%}
+<table class="table">
+    <thead>
+        <tr>
+            <th scope="col">id</th>
+            <th scope="col">Baslik</th>
+            <th scope="col">Yazar</th>
+            <th scope="col">Tarih</th>
+            <th scope="col">Guncelle</th>
+            <th scope="col">Sil</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for article in articles %}
+
+        <tr>
+            <th scope="row">{{article.id}}</th>
+            <td>
+                <a href="/articles/article/{{article.id}}">{{article.title}}</a>
+            </td>
+            <td>{{article.author.username}}</td>
+            <td>{{article.created_data}}</td>
+            <td>
+                <a class="btn btn-danger" href="/articles/update/{{article.id}}">Guncelle</a>
+            </td>
+            <td>
+                <a class="btn btn-danger" href="/articles/delete/{{article.id}}">Sil</a>
+            </td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% else %}
+<div class="alert alert-danger">Henuz bir makeleniz yoxdur</div>
+{% endif %}
+
+<hr /> {%endblock body%}
+
+<!-- 27 basla -->

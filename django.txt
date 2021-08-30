@@ -1,0 +1,14 @@
+data base islemi
+python manage.py shell
+from django.contrib.auth.models import User
+from article.models import Article
+
+newUser=User(username="denemekullanici",password="123")
+newUser.save()
+article=Article(title="Django Shell Deneme",content="Icerik icerik",author=newUser)
+article.title="deneme 21 degisdi" #bele yazanda deyisir
+Article.objects.all()
+article.delete()
+article.objects.filter(title__contains="Den")
+
+

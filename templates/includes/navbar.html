@@ -1,0 +1,39 @@
+<nav class="navbar navbar-expand-lg bg-dark navbar-dark">
+
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+    <a class="navbar-brand" href="{%url 'index'%}">Blog</a>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav mr-auto">
+            <li class="nav-item">
+                <a class="nav-link active" href="{%url 'about'%}">About</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link active" href="{%url 'article:articles'%}">Article</a>
+            </li>
+
+        </ul>
+
+        <ul class="navbar-nav ml-auto">
+
+            {%if request.user.is_authenticated%}
+            <li class="nav-item active">
+                <a class="nav-link" href="{%url 'article:dashboard'%}">Kontrol Panel</a>
+            </li>
+            <li class="nav-item active">
+                <a class="nav-link" href="{%url 'user:logout'%}">Cikis yap</a>
+            </li>
+            {%else%}
+
+            <li class="nav-item active">
+                <a class="nav-link" href="{%url 'user:login'%}">Giris yap</a>
+            </li>{%endif%}
+            <li class="nav-item active">
+                <a class="nav-link" href="{%url 'user:register'%}">Kayit ol</a>
+            </li>
+
+
+        </ul>
+    </div>
+</nav>

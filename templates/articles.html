@@ -1,0 +1,63 @@
+{%extends "layout.html"%} {%block body %}
+<!-- {% load crispy_forms_tags %} -->
+
+<div class="row">
+
+    <div class="col-md-10 offset-md-3">
+        <div class="col-lg-8">
+            <h3>Makalleler</h3>
+            <hr>
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-10 offset-md-3">
+        <div class="col-lg-8">
+
+            <form class="form-inline my-2 my-lg-0">
+                {%csrf_token%}
+                <input class="form-control mr-sm-2" name="keyword" type="search" placeholder="Search" aria-label="Search">
+                <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+            </form>
+        </div>
+    </div>
+</div>
+
+{%if articles%} {%for article in articles%}
+
+<div class="row">
+    <div class="col-md-10 offset-md-3">
+        <div class="col-lg-8">
+            <!-- Post title-->
+            <a href="{%url 'article:detail' article.id%}">
+                <h2>{{article.title}}</h2>
+            </a>
+            <!-- Author -->
+            <p class="lead">
+                by {{article.author.username}} tarafindan yayinlandi!
+            </p>
+            <hr>
+            <!-- Date Time -->
+            <p>{{article.created_data}}</p>
+            <hr> {%if article.article_image%}
+            <a href="/articles/article/{{article.id}}">
+                <img class="img-fluid rounded" src="{{article.article_image.url}}" alt="" /> {%endif%}
+
+            </a>
+            <!-- Post content-->
+            <p class="lead">{{article.content|safe|truncatewords:50}}</p>
+            <hr>
+            <a href="/articles/article/{{article.id}}" style="float: right;" class="btn btn-danger">devamini oku</a>
+        </div>
+    </div>
+</div>
+{%endfor%} {%else%}
+<div class="row">
+    <div class="col-md-10 offset-md-3">
+        <div class="col-lg-8">
+
+            <div class="alert mt-5 alert-danger">Makale Buluna Madi</div>
+        </div>
+    </div>
+</div>
+{%endif%} {%endblock body%}
